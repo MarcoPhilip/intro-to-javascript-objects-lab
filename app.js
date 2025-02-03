@@ -166,4 +166,155 @@ Also, log the `game.items` array to confirm that the pokeball quantity is being 
 Solve Exercise 11 here:
 */
 
+game.catchPokemon = function(pokemonObj) {
+    game.party.push(pokemonObj);
+    game.items[1].quantity =  game.items[1].quantity - 1;
+    return "Gotcha: " + pokemonObj.name; 
+}
+console.log("Exercise 11 result: ", game.catchPokemon(pokemon[50]) + " || " + "Pokeball Quantity: " + game.items[1].quantity)
 
+
+/*
+Exercise 12
+1. Similar to Exercise 6, now complete gyms with a difficulty below 6. How will you approach this?
+ (change the value of `complete` in the qualifying objects from false to true).
+
+Solve Exercise 12 here:
+*/
+
+game.gyms.forEach ((gyms) => {
+    if (gyms.difficulty <= 5) {
+        gyms.completed = true;
+    }
+}) 
+
+console.log("Exercise 12 result: ", game.gyms)
+
+/*
+Exercise 13
+1. Create a `gymStatus` method in `game` to tally completed and incomplete gyms.
+2. How will you iterate through the `gyms` array and update the tally? Remember to log the final tally.
+
+This method should:
+  - Not accept any arguments.
+  - Initially create a constant `gymTally`, which is an object that has two 
+    properties: `completed` and `incomplete`, both of which are initially set to 0.
+  - Iterate through the objects in the `game.gyms` array and update the 
+    properties on `gymTally` as follows: 
+    - `completed` should count how many gyms in the array have a value of `true` 
+      for their `completed` property. 
+    - `incomplete` should count how many gyms in the array have a value of 
+      `false` for their `completed` property.
+  - Log the value of `gymTally`.
+  - The method should not return anything.
+
+For example, if five gym objects have a value of `true` on their `completed` property and three gym objects have a value of `false` on their `completed` property, the logged value would be: `{ completed: 5, incomplete: 3 }`.
+
+Solve Exercise 13 here:
+*/
+
+
+
+
+//create a method gymStatus, no argument needed
+game.gymStatus = function() {
+//create a constant gymTally that has 2 properties completed and incomplete, both set at 0
+    const gymTally = { completed: 0, incomplete: 0 };
+// iterate through the game.gyms array
+    for (let i = 0; i < game.gyms.length; i++) {
+// console log the array from start to finish. write '[i]' to display only the certain index of the array
+console.log(game.gyms[i])
+// write the conditions as if the gymTally adds a value whenever a gym is complete or not
+    if (game.gyms[i].completed == true) {
+        gymTally.completed = gymTally.completed + 1
+    }
+    if (game.gyms[i].completed == false) {
+        gymTally.incomplete = gymTally.incomplete + 1
+    }
+}
+//return the value of gymTally
+    return gymTally
+}
+console.log("Exercise 13 result: " , game.gymStatus());
+
+
+
+
+/*
+Exercise 14
+1. Add a `partyCount` method to `game` that counts the number of Pokémon in your party.
+
+This method should:
+  - Not accept any arguments.
+  - Count the number of Pokemon in the party.
+  - return the found number of Pokemon in the party.
+
+Solve Exercise 14 here:
+*/
+
+game.partyCount = function() {
+    return myParty.length
+
+}
+console.log("Exercise 14 result: " + game.partyCount());
+
+
+/*
+Exercise 15
+1. Now, complete gyms with a difficulty below 8. Reflect on how this is similar to or different from the previous gym exercises.
+(change the value of `complete` in the qualifying objects from false to true).
+
+Solve Exercise 15 here:
+*/
+
+
+game.gyms.forEach ((gyms) => {
+    if (gyms.difficulty < 8) {
+        gyms.completed = true;
+    }
+}) 
+
+console.log("Exercise 15 result: ",game.gyms);
+
+
+/*
+Exercise 16
+1. Log the entire `game` object to the console. Take a moment to review the changes you've made throughout the exercises.
+
+
+Solve Exercise 16 here:
+*/
+
+console.log("Exercise 16 result: ",game);
+
+
+/*
+Exercise 17
+1. Arrange the Pokémon in `game.party` by their HP. The one with the highest HP should come first.
+2. You'll need to use the `.sort()` method. How does the compare function work in sorting numbers?
+
+
+Solve Exercise 17 here:
+*/
+
+myParty.sort((a, b) => b.hp - a.hp);
+console.log("Exercise 17: ",game.party);
+
+/*
+Exercise 18
+Add a new property to the `game` object called `collection` and initialize its value to an empty array.
+
+Copy the `catchPokemon` method you wrote in Exercise Twelve and paste it below. Modify it so that:
+  - Ensure that no more than six Pokemon can be in the party at any time. 
+    Excess Pokemon should be placed in the `game.collection` array.
+  - It's up to you how to distribute Pokemon in a situation where more than six 
+    would be placed into the `game.party` array.
+
+Again, for this exercise, it's okay to have a negative number of pokeballs.
+
+After updating the method, use it by calling it and passing in a pokemon object of your choice from the `pokemon` data to catch it.
+
+Also, log the `game.items` array to confirm that the pokeball quantity is being decremented.
+
+Solve Exercise 18 here:
+*/
