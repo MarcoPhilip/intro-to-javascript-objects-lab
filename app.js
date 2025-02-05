@@ -318,3 +318,65 @@ Also, log the `game.items` array to confirm that the pokeball quantity is being 
 
 Solve Exercise 18 here:
 */
+game.collection = [];
+game.catchPokemon = function(pokemonObj) {
+    // write a condition for the party so that it is taking 5 or less pokemon
+    if (game.party.length <= 5) {
+    // push the pokemon to the game.party array 
+    game.party.push(pokemonObj);
+    } 
+    // if greater or equal to 6, push the pokemon into the game.collection array
+    else {
+      game.collection.push(pokemonObj);
+    }
+    game.items[1].quantity =  game.items[1].quantity - 1;
+    return "Gotcha: " + pokemonObj.name; 
+}
+
+console.log("Exercise 18 result: ",game.collection);
+console.log(game.party)
+console.log(game.items);
+
+
+/*
+Exercise 19
+Copy the `catchPokemon` method that you just wrote above, and paste it below. The time has come to make it so that we cannot catch a Pokemon when we do not have any pokeballs to catch it with. 
+
+Modify the method so that if there are no pokeballs a message will be displayed that there are not enough pokeballs to catch the desired Pokemon.
+
+Also, ensure that the Pokemon isn't added to the `game.party` or the `game.collection`.
+
+Solve Exercise 19 here:
+*/
+
+game.catchPokemon = function(pokemonObj) {
+  // set a condition where console log alerts when theres no more pokeballs left in the items or if it is less or equal to 0
+  if (game.items[1].quantity <= 0) { 
+    console.log("You don't have any pokeball left to catch a pokemon!");
+  }
+  // write a condition for the party so that it is taking 5 or less pokemon and if the pokeball quantities is greater or equal to 1
+  else if (game.party.length <= 5 && game.items[1].quantity >= 1) {
+  // push the pokemon to the game.party array 
+    game.party.push(pokemonObj);
+  } 
+  // if greater or equal to 6, push the pokemon into the game.collection array
+  else  {
+    game.collection.push(pokemonObj);
+  }
+  
+  game.items[1].quantity =  game.items[1].quantity - 1;
+  return "Gotcha: " + pokemonObj.name; 
+}
+game.catchPokemon(pokemon[77])
+game.catchPokemon(pokemon[41])
+game.catchPokemon(pokemon[16])
+game.catchPokemon(pokemon[120])
+game.catchPokemon(pokemon[111])
+game.catchPokemon(pokemon[111])
+game.catchPokemon(pokemon[111])
+game.catchPokemon(pokemon[111])
+game.catchPokemon(pokemon[111])
+
+
+
+console.log(game.collection,game.party,game.items)
