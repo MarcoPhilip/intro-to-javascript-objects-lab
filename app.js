@@ -373,10 +373,105 @@ game.catchPokemon(pokemon[16])
 game.catchPokemon(pokemon[120])
 game.catchPokemon(pokemon[111])
 game.catchPokemon(pokemon[111])
-game.catchPokemon(pokemon[111])
-game.catchPokemon(pokemon[111])
-game.catchPokemon(pokemon[111])
 
 
 
-console.log(game.collection,game.party,game.items)
+
+
+console.log("Exercise 19 results: ",game.collection);
+console.log("Exercise 19 results: ",game.party);
+console.log("Exercise 19 results: ",game.items);
+
+
+/*
+Exercise 20
+Copy the `catchPokemon` method that you just wrote above, and paste it below. Modify is so that you can just pass in the name of a Pokemon instead of an entire object, and the method will look up the Pokemon from the data set for you.
+
+The string passed in should be allowed to be any case (for example, if the string 'PiKacHU' is passed to the function, it should match to 'Pikachu' in the data set). 
+
+If there is not a match, then return a string noting that the selected Pokemon does not exist. Ensure you do not decrement the pokeball count if an invalid Pokemon name is passed in, and also ensure that the Pokemon isn't added to the `game.party` or the `game.collection`.
+
+Solve Exercise 20 here:
+*/
+
+game.catchPokemon = function(pokemonName) {
+  // write a code where you can input a pokemon name whenever you catch it instead of typing the whole object
+  
+  //write the code so that the string is not case sensitive
+
+  // create an empty pokemon obj variable
+  let pokemonObj;
+  //loop through the data array
+    for (let i=0; i < pokemon.length; i++) {
+    //if the name matches the individual pokemon in the loop, then we found the pokemon
+    //modify the code and set the character to uppercases for the pokemon names
+    if (pokemon[i].name.toUpperCase() == pokemonName.toUpperCase()) {
+      pokemonObj = pokemon[i];
+    }
+    //assign it to the pokemon obj variable
+    }
+  // set a condition where console log alerts when theres no more pokeballs left in the items or if it is less or equal to 0
+  if (game.items[1].quantity <= 0) { 
+    console.log("You don't have any pokeball left to catch a pokemon!");
+  }
+  // write a condition for the party so that it is taking 5 or less pokemon and if the pokeball quantities is greater or equal to 1
+  else if (game.party.length <= 5 && game.items[1].quantity >= 1) {
+  // push the pokemon to the game.party array 
+    game.party.push(pokemonObj);
+  } 
+  // if greater or equal to 6, push the pokemon into the game.collection array
+  else  {
+    game.collection.push(pokemonObj);
+  }
+  
+  game.items[1].quantity =  game.items[1].quantity - 1;
+  return "Gotcha: " + pokemonObj.name; 
+  
+}
+game.catchPokemon('pidgey')
+
+console.log("Exercise 20 results: ",game.collection);
+console.log("Exercise 20 results: ",game.party);
+console.log("Exercise 20 results: ",game.items);
+
+
+/*
+Exercise 21
+Dynamically construct an object with the existing `pokemon` data sorted by the different pokemon types. The object will have this structure:
+
+{
+  grass: [
+    { number: 1, name: 'Bulbasaur', type: 'grass', hp: 45, starter: true },
+    { number: 2, name: 'Ivysaur', type: 'grass', hp: 60, starter: false },
+    { number: 3, name: 'Venusaur', type: 'grass', hp: 80, starter: false },
+    * more grass type Pokemon objects...
+  ],
+  fire: [
+    { number: 4, name: 'Charmander', type: 'fire', hp: 39, starter: true },
+    * more fire type Pokemon objects...
+  ],
+  water: [
+    * water type Pokemon objects...
+  ],
+  * etc... until there is an array for every Pokemon type!
+}
+
+Log the object when it's constructed.
+
+Solve Exercise 21 here:
+*/
+
+//assign an empty object called pokemonTypes
+const pokemonTypes = {};
+//loop through the pokemon array
+for (let i = 0; i < pokemon.length; i++) {
+  //take out the type property from the pokemon indexes
+  const {type} = pokemon[i];
+  // write an if statement to see if a type of pokemon is in the pokemonTypes. if it is not, assign the type into an empty array 
+  if (!pokemonTypes[type]) {
+    pokemonTypes[type] = [];
+  }
+  // push each pokemon into its right type of group
+  pokemonTypes[type].push(pokemon[i]);
+}
+console.log("Exercise 21 result: ",pokemonTypes)
